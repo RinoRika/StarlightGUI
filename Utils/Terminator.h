@@ -150,6 +150,7 @@ BOOL WinstaKillProcess(PWSTR hServer, DWORD dwPid, ULONG exitCode) {
 }
 
 bool PatchThread64(DWORD pid) {
+#ifdef _WIN64
 	static auto exitAddr = (DWORDLONG)GetProcAddress(GetModuleHandleW(L"kernel32.dll"), "ExitProcess");
 
 	HANDLE hThread = OpenThread(THREAD_ALL_ACCESS, FALSE, pid);
@@ -182,6 +183,10 @@ bool PatchThread64(DWORD pid) {
 	ResumeThread(hThread);
 	CloseHandle(hThread);
 	return true;
+#else
+	CreateInfoBarAndDisplay(L"Terminator", L"该方法仅支持x64平台", InfoBarSeverity::Warning, t_root, t_parent);
+	return false;
+#endif
 }
 
 bool EnablePrivilege(LPCTSTR privilege) {
