@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "Config.h"
+#include "Utils/Config.h"
 #include "App.xaml.h"
 #include "MainWindow.xaml.h"
 

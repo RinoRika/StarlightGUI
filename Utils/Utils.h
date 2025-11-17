@@ -1,7 +1,7 @@
 #pragma once
 
 #include <pch.h>
-#include <CppUtils.h>
+#include <Utils/CppUtils.h>
 #include <winrt/Windows.Foundation.h>
 #include <winrt/Microsoft.UI.Xaml.h>
 #include <winrt/Microsoft.UI.Xaml.Media.h>

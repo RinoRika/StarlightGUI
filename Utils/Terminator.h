@@ -8,8 +8,8 @@
 #include <psapi.h>
 #include <cctype>
 #include <algorithm>
-#include <Utils.h>
-#include <KernelBase.h>
+#include <Utils/Utils.h>
+#include <Utils/KernelBase.h>
 
 typedef struct _PACKAGE_SUICIDE { intptr_t adExitProcess; }PACKAGE_SUICIDE, * PPACKAGE_SUICIDE;
 typedef HANDLE(WINAPI* P_WinStationOpenServerW)(_In_ PWSTR serverName);

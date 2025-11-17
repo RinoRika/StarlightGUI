@@ -17,8 +17,8 @@
 #include <future>
 #include <mutex>
 #include <shellapi.h>
-#include <TaskUtils.h>
-#include <Utils.h>
+#include <Utils/TaskUtils.h>
+#include <Utils/Utils.h>
 
 using namespace winrt;
 using namespace Microsoft::UI::Xaml;

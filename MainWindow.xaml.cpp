@@ -1,11 +1,10 @@
 #include "pch.h"
-#include "Config.h"
+#include "Utils/Config.h"
 #include "MainWindow.xaml.h"
 #if __has_include("MainWindow.g.cpp")
 #include "MainWindow.g.cpp"
 #endif
 
-#include <ProcessPage.xaml.h>
 #include <winrt/Microsoft.UI.h>
 #include <winrt/Microsoft.UI.Windowing.h>
 #include <winrt/Microsoft.UI.Dispatching.h>

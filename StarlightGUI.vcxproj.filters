@@ -5,68 +5,80 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="MainWindow.xaml" />
-    <Page Include="SettingsPage.xaml">
+    <Page Include="Pages\HomePage.xaml">
       <Filter>Pages</Filter>
     </Page>
-    <Page Include="HomePage.xaml">
+    <Page Include="Pages\ProcessPage.xaml">
       <Filter>Pages</Filter>
     </Page>
-    <Page Include="ProcessPage.xaml">
+    <Page Include="Pages\SettingsPage.xaml">
       <Filter>Pages</Filter>
     </Page>
-    <Page Include="TaskPage.xaml">
+    <Page Include="Pages\TaskPage.xaml">
       <Filter>Pages</Filter>
     </Page>
   </ItemGroup>
   <ItemGroup>
     <Midl Include="MainWindow.idl" />
-    <Midl Include="ProcessInfo.idl">
+    <Midl Include="Pages\HomePage.idl">
+      <Filter>Pages</Filter>
+    </Midl>
+    <Midl Include="Pages\ProcessPage.idl">
+      <Filter>Pages</Filter>
+    </Midl>
+    <Midl Include="Pages\SettingsPage.idl">
+      <Filter>Pages</Filter>
+    </Midl>
+    <Midl Include="Pages\TaskPage.idl">
+      <Filter>Pages</Filter>
+    </Midl>
+    <Midl Include="Utils\ProcessInfo.idl">
       <Filter>Utils</Filter>
     </Midl>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
-    <ClCompile Include="ProcessInfo.cpp">
+    <ClCompile Include="Utils\ProcessInfo.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
-    <ClCompile Include="DriverUtils.cpp">
+    <ClCompile Include="Utils\KernelBase.cpp">
       <Filter>Utils\Advanced</Filter>
     </ClCompile>
-    <ClCompile Include="KernelBase.cpp">
+    <ClCompile Include="Utils\DriverUtils.cpp">
       <Filter>Utils\Advanced</Filter>
     </ClCompile>
-    <ClCompile Include="KernelInstance.cpp">
+    <ClCompile Include="Utils\KernelInstance.cpp">
       <Filter>Utils\Advanced</Filter>
     </ClCompile>
-    <ClCompile Include="TaskUtils.cpp">
+    <ClCompile Include="Utils\TaskUtils.cpp">
       <Filter>Utils\Advanced</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
-    <ClInclude Include="Config.h">
+    <ClInclude Include="Utils\Config.h">
       <Filter>Utils</Filter>
     </ClInclude>
-    <ClInclude Include="Elevator.h">
+    <ClInclude Include="Utils\CppUtils.h">
       <Filter>Utils</Filter>
     </ClInclude>
-    <ClInclude Include="Terminator.h">
+    <ClInclude Include="Utils\Elevator.h">
       <Filter>Utils</Filter>
     </ClInclude>
-    <ClInclude Include="Utils.h">
+    <ClInclude Include="Utils\ProcessInfo.h">
       <Filter>Utils</Filter>
     </ClInclude>
-    <ClInclude Include="CppUtils.h">
+    <ClInclude Include="Utils\Terminator.h">
       <Filter>Utils</Filter>
     </ClInclude>
-    <ClInclude Include="ProcessInfo.h">
+    <ClInclude Include="Utils\Utils.h">
       <Filter>Utils</Filter>
     </ClInclude>
-    <ClInclude Include="KernelBase.h">
+    <ClInclude Include="Utils\KernelBase.h">
       <Filter>Utils\Advanced</Filter>
     </ClInclude>
-    <ClInclude Include="TaskUtils.h">
+    <ClInclude Include="Utils\TaskUtils.h">
       <Filter>Utils\Advanced</Filter>
     </ClInclude>
   </ItemGroup>

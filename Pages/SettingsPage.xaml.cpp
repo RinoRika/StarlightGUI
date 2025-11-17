@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "SettingsPage.xaml.h"
-#include "Config.h"
+#include "Utils/Config.h"
 #if __has_include("SettingsPage.g.cpp")
 #include "SettingsPage.g.cpp"
 #endif

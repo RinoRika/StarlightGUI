@@ -3,7 +3,7 @@
 #include <string>
 #include <tlhelp32.h>
 #include <vector>
-#include <Utils.h>
+#include <Utils/Utils.h>
 
 using namespace winrt;
 using namespace winrt::StarlightGUI::implementation;

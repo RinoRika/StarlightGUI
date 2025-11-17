@@ -150,12 +150,17 @@
     <Manifest Include="app.manifest" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CppUtils.h" />
-    <ClInclude Include="KernelBase.h" />
-    <ClInclude Include="Elevator.h" />
-    <ClInclude Include="HomePage.xaml.h">
-      <DependentUpon>HomePage.xaml</DependentUpon>
-      <SubType>Code</SubType>
+    <ClInclude Include="Pages\HomePage.xaml.h">
+      <DependentUpon>Pages\HomePage.xaml</DependentUpon>
+    </ClInclude>
+    <ClInclude Include="Pages\ProcessPage.xaml.h">
+      <DependentUpon>Pages\ProcessPage.xaml</DependentUpon>
+    </ClInclude>
+    <ClInclude Include="Pages\SettingsPage.xaml.h">
+      <DependentUpon>Pages\SettingsPage.xaml</DependentUpon>
+    </ClInclude>
+    <ClInclude Include="Pages\TaskPage.xaml.h">
+      <DependentUpon>Pages\TaskPage.xaml</DependentUpon>
     </ClInclude>
     <ClInclude Include="pch.h" />
     <ClInclude Include="App.xaml.h">
@@ -164,48 +169,36 @@
     <ClInclude Include="MainWindow.xaml.h">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </ClInclude>
-    <ClInclude Include="ProcessInfo.h" />
-    <ClInclude Include="ProcessPage.xaml.h">
-      <DependentUpon>ProcessPage.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </ClInclude>
-    <ClInclude Include="SettingsPage.xaml.h">
-      <DependentUpon>SettingsPage.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </ClInclude>
-    <ClInclude Include="TaskPage.xaml.h">
-      <DependentUpon>TaskPage.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </ClInclude>
-    <ClInclude Include="TaskUtils.h" />
-    <ClInclude Include="Terminator.h" />
-    <ClInclude Include="Config.h" />
-    <ClInclude Include="Utils.h" />
+    <ClInclude Include="Utils\Config.h" />
+    <ClInclude Include="Utils\CppUtils.h" />
+    <ClInclude Include="Utils\Elevator.h" />
+    <ClInclude Include="Utils\KernelBase.h" />
+    <ClInclude Include="Utils\ProcessInfo.h" />
+    <ClInclude Include="Utils\TaskUtils.h" />
+    <ClInclude Include="Utils\Terminator.h" />
+    <ClInclude Include="Utils\Utils.h" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml" />
-    <Page Include="HomePage.xaml">
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="MainWindow.xaml" />
-    <Page Include="ProcessPage.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="SettingsPage.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="TaskPage.xaml">
-      <SubType>Designer</SubType>
-    </Page>
+    <Page Include="Pages\HomePage.xaml" />
+    <Page Include="Pages\ProcessPage.xaml" />
+    <Page Include="Pages\SettingsPage.xaml" />
+    <Page Include="Pages\TaskPage.xaml" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="DriverUtils.cpp" />
-    <ClCompile Include="HomePage.xaml.cpp">
-      <DependentUpon>HomePage.xaml</DependentUpon>
-      <SubType>Code</SubType>
+    <ClCompile Include="Pages\HomePage.xaml.cpp">
+      <DependentUpon>Pages\HomePage.xaml</DependentUpon>
     </ClCompile>
-    <ClCompile Include="KernelBase.cpp" />
-    <ClCompile Include="KernelInstance.cpp" />
+    <ClCompile Include="Pages\ProcessPage.xaml.cpp">
+      <DependentUpon>Pages\ProcessPage.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="Pages\SettingsPage.xaml.cpp">
+      <DependentUpon>Pages\SettingsPage.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="Pages\TaskPage.xaml.cpp">
+      <DependentUpon>Pages\TaskPage.xaml</DependentUpon>
+    </ClCompile>
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
@@ -216,43 +209,22 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </ClCompile>
     <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
-    <ClCompile Include="ProcessInfo.cpp" />
-    <ClCompile Include="ProcessPage.xaml.cpp">
-      <DependentUpon>ProcessPage.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </ClCompile>
-    <ClCompile Include="SettingsPage.xaml.cpp">
-      <DependentUpon>SettingsPage.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </ClCompile>
-    <ClCompile Include="TaskPage.xaml.cpp">
-      <DependentUpon>TaskPage.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </ClCompile>
-    <ClCompile Include="TaskUtils.cpp" />
+    <ClCompile Include="Utils\DriverUtils.cpp" />
+    <ClCompile Include="Utils\KernelBase.cpp" />
+    <ClCompile Include="Utils\KernelInstance.cpp" />
+    <ClCompile Include="Utils\ProcessInfo.cpp" />
+    <ClCompile Include="Utils\TaskUtils.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Midl Include="HomePage.idl">
-      <DependentUpon>HomePage.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Midl>
     <Midl Include="MainWindow.idl">
       <SubType>Code</SubType>
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Midl>
-    <Midl Include="ProcessInfo.idl" />
-    <Midl Include="ProcessPage.idl">
-      <DependentUpon>ProcessPage.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Midl>
-    <Midl Include="SettingsPage.idl">
-      <DependentUpon>SettingsPage.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Midl>
-    <Midl Include="TaskPage.idl">
-      <DependentUpon>TaskPage.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Midl>
+    <Midl Include="Pages\HomePage.idl" />
+    <Midl Include="Pages\ProcessPage.idl" />
+    <Midl Include="Pages\SettingsPage.idl" />
+    <Midl Include="Pages\TaskPage.idl" />
+    <Midl Include="Utils\ProcessInfo.idl" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="readme.txt">

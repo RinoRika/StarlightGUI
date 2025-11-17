@@ -3,7 +3,7 @@
 #include "ProcessPage.g.h"
 #include <vector>
 #include <winrt/Windows.Foundation.Collections.h>
-#include <ProcessInfo.h>
+#include <Utils/ProcessInfo.h>
 
 namespace winrt::StarlightGUI::implementation
 {

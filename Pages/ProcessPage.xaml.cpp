@@ -5,9 +5,9 @@
 #include "ProcessPage.g.cpp"
 #endif
 
-#include <Terminator.h>
-#include <Elevator.h>
-#include <Utils.h>
+#include <Utils/Terminator.h>
+#include <Utils/Elevator.h>
+#include <Utils/Utils.h>
 #include <winrt/Windows.Foundation.h>
 #include <winrt/Windows.ApplicationModel.h>
 #include <winrt/Windows.Storage.h>
@@ -18,7 +18,7 @@
 #include <winrt/Microsoft.UI.Xaml.Controls.h>
 #include <winrt/Microsoft.UI.Xaml.Media.h>
 #include <winrt/Microsoft.UI.Interop.h>
-#include <Config.h>
+#include <Utils/Config.h>
 #include <vector>
 #include <memory>
 #include <sstream>
