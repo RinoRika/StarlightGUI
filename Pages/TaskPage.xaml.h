@@ -16,7 +16,10 @@ namespace winrt::StarlightGUI::implementation
         void OnNavigatedFrom(winrt::Microsoft::UI::Xaml::Navigation::NavigationEventArgs const& e);
 
         void ColumnHeader_Click(IInspectable const& sender, winrt::Microsoft::UI::Xaml::RoutedEventArgs const& e);
-        void ToggleSort(bool& isAscending, const std::string& column);
+        void ApplySort(bool& isAscending, const std::string& column);
+
+        winrt::fire_and_forget ProcessSearchBox_TextChanged(winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::RoutedEventArgs const& e);
+		void ApplyFilter(std::vector<winrt::StarlightGUI::ProcessInfo>& processes, hstring& query);
 
         // 进程列表相关方法
         winrt::Windows::Foundation::IAsyncAction LoadProcessList();

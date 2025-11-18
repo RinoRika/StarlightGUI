@@ -24,21 +24,34 @@
                     </Grid.RowDefinitions>
 
                     <!-- 进程列表标题和刷新按钮 -->
-                    <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="0,0,0,10">
-                        <TextBlock Text="任务管理器" FontSize="18" FontWeight="Bold" VerticalAlignment="Center"/>
-                        <Button x:Name="RefreshProcessListButton" 
-                            Content="刷新" 
-                            Margin="20,0,0,0" 
-                            Click="RefreshProcessListButton_Click"
-                            Padding="12,6"
-                            VerticalAlignment="Center"/>
-                        <TextBlock x:Name="ProcessCountText" 
-                               Text="正在加载..." 
-                               Margin="20,0,0,0" 
-                               VerticalAlignment="Center"
-                               Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"/>
-                        <RichEditBox x:Name="ProcessSearchBox" HorizontalAlignment="Right" Width="200" PlaceholderText="搜索进程..."/>
-                    </StackPanel>
+                    <Grid Grid.Row="0" HorizontalAlignment="Stretch" Margin="0,0,0,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="任务管理器" FontSize="18" FontWeight="Bold" VerticalAlignment="Center"/>
+                        <Button Grid.Column="1"
+                                x:Name="RefreshProcessListButton" 
+                                Content="刷新" 
+                                Margin="20,0,0,0" 
+                                Click="RefreshProcessListButton_Click"
+                                Padding="12,6"
+                                VerticalAlignment="Center"/>
+                        <TextBlock Grid.Column="2" 
+                                   Name="ProcessCountText" 
+                                   Text="正在加载..." 
+                                   Margin="20,0,0,0" 
+                                   VerticalAlignment="Center"
+                                   Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"/>
+                        <RichEditBox Grid.Column="4"
+                                     x:Name="ProcessSearchBox" 
+                                     HorizontalAlignment="Center" Width="300" 
+                                     PlaceholderText="搜索进程或描述..."
+                                     TextChanged="ProcessSearchBox_TextChanged"/>
+                    </Grid>
 
                     <!-- ListView，包含列标题和数据 -->
                     <ListView x:Name="ProcessListView"

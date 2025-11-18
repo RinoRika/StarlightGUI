@@ -48,7 +48,7 @@ namespace winrt::StarlightGUI::implementation {
 
 		if (!DriverUtils::LoadDriver(rtcorePath.c_str(), L"RTCore64.sys", unused)) return 0;
 
-		HANDLE device = CreateFile(LR"(\\.\RTCore64)", GENERIC_READ | GENERIC_WRITE, 0, NULL, OPEN_EXISTING, 0, NULL);
+		HANDLE device = CreateFile(L"\\\\.\\RTCore64", GENERIC_READ | GENERIC_WRITE, 0, NULL, OPEN_EXISTING, 0, NULL);
 
 		if (device == INVALID_HANDLE_VALUE) {
 			return 0;
@@ -80,7 +80,7 @@ namespace winrt::StarlightGUI::implementation {
 			return;
 		}
 
-		HANDLE device = CreateFile(LR"(\\.\RTCore64)", GENERIC_READ | GENERIC_WRITE, 0, NULL, OPEN_EXISTING, 0, NULL);
+		HANDLE device = CreateFile(L"\\\\.\\RTCore64", GENERIC_READ | GENERIC_WRITE, 0, NULL, OPEN_EXISTING, 0, NULL);
 
 		if (device == INVALID_HANDLE_VALUE) return;
 

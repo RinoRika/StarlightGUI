@@ -148,13 +148,12 @@ namespace winrt::StarlightGUI::implementation
 
                 hstring result = co_await client.GetStringAsync(uri);
 
-
                 // Read json object
                 auto json = Windows::Data::Json::JsonObject::Parse(result);
                 hitokoto = L"“" + json.GetNamedString(L"hitokoto") + L"”";
             }
         }
-        catch (...)
+        catch (hresult_error)
         {
             hitokoto = L"无法加载内容... :(";
         }

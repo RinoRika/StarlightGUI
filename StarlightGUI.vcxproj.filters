@@ -81,6 +81,9 @@
     <ClInclude Include="Utils\TaskUtils.h">
       <Filter>Utils\Advanced</Filter>
     </ClInclude>
+    <ClInclude Include="IOBase.h">
+      <Filter>Utils\Advanced</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Wide310x150Logo.scale-200.png">

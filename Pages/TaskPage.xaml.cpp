@@ -21,6 +21,7 @@
 #include <Utils/Utils.h>
 
 using namespace winrt;
+using namespace Microsoft::UI::Text;
 using namespace Microsoft::UI::Xaml;
 using namespace Microsoft::UI::Xaml::Controls;
 using namespace Microsoft::UI::Xaml::Media;
@@ -35,7 +36,6 @@ namespace winrt::StarlightGUI::implementation
     const static uint64_t MB = KB * 1024;
     const static uint64_t GB = MB * 1024;
     static std::map<hstring, std::optional<winrt::Microsoft::UI::Xaml::Media::ImageSource>> iconCache;
-    static std::mutex iconCacheMutex;
     static HDC hdc{ nullptr };
 
     TaskPage::TaskPage() {
@@ -235,6 +235,8 @@ namespace winrt::StarlightGUI::implementation
 
         m_isLoadingProcesses = true;
 
+        auto start = std::chrono::high_resolution_clock::now();
+
         auto lifetime = get_strong();
         int selectedItem = -1;
         if (ProcessListView().SelectedItem()) selectedItem = ProcessListView().SelectedItem().as<winrt::StarlightGUI::ProcessInfo>().Id();
@@ -335,7 +337,7 @@ namespace winrt::StarlightGUI::implementation
             // Load icon from cache or create new
             if (iconCache.find(process.ExecutablePath()) == iconCache.end()) {
                 SHFILEINFO shfi;
-                if (SHGetFileInfo(process.ExecutablePath().c_str(), 0, &shfi, sizeof(SHFILEINFO), SHGFI_ICON | SHGFI_SMALLICON)) {
+                if (SHGetFileInfoW(process.ExecutablePath().c_str(), 0, &shfi, sizeof(SHFILEINFO), SHGFI_ICON | SHGFI_SMALLICON)) {
                     auto stream = winrt::Windows::Storage::Streams::InMemoryRandomAccessStream();
                     ICONINFO iconInfo;
                     if (GetIconInfo(shfi.hIcon, &iconInfo)) {
@@ -384,14 +386,25 @@ namespace winrt::StarlightGUI::implementation
             m_processList.Append(process);
         }
 
+		// Restore search filter
+        winrt::hstring query;
+        ProcessSearchBox().Document().GetText(TextGetOptions::NoHidden, query);
+
+        if (!query.empty()) {
+            ApplyFilter(processes, query);
+        }
+
         m_processList_unsorted = m_processList;
 
-        // Restore last sort option
-        ToggleSort(currentSortingOption, currentSortingType);
+        // Restore sort option
+        ApplySort(currentSortingOption, currentSortingType);
+
+        auto end = std::chrono::high_resolution_clock::now();
+        auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
 
         // Update count
         std::wstringstream countText;
-        countText << L"共 " << processes.size() << L" 个进程";
+        countText << L"共 " << processes.size() << L" 个进程 (" << duration.count() << " ms)";
         ProcessCountText().Text(countText.str());
         processes.clear();
 
@@ -432,24 +445,24 @@ namespace winrt::StarlightGUI::implementation
         // Reset all first
         if (columnName == L"Name")
         {
-            ToggleSort(m_isNameAscending, "Name");
+            ApplySort(m_isNameAscending, "Name");
         }
         else if (columnName == L"CpuUsage")
         {
-            ToggleSort(m_isCpuAscending, "CpuUsage");
+            ApplySort(m_isCpuAscending, "CpuUsage");
         }
         else if (columnName == L"MemoryUsage")
         {
-            ToggleSort(m_isMemoryAscending, "MemoryUsage");
+            ApplySort(m_isMemoryAscending, "MemoryUsage");
         }
         else if (columnName == L"Id")
         {
-            ToggleSort(m_isIdAscending, "Id");
+            ApplySort(m_isIdAscending, "Id");
         }
     }
 
     // 排序切换
-    void TaskPage::ToggleSort(bool& isAscending, const std::string& column)
+    void TaskPage::ApplySort(bool& isAscending, const std::string& column)
     {
         NameHeaderButton().Content(box_value(L"进程"));
         CpuHeaderButton().Content(box_value(L"CPU"));
@@ -539,6 +552,46 @@ namespace winrt::StarlightGUI::implementation
         currentSortingOption = !isAscending;
         currentSortingType = column;
     }
+
+    winrt::fire_and_forget TaskPage::ProcessSearchBox_TextChanged(winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::RoutedEventArgs const& e)
+    {
+        // Load list first because we are clearing and re-adding elements, not sorting
+        co_await LoadProcessList();
+
+		winrt::hstring query;
+        ProcessSearchBox().Document().GetText(TextGetOptions::NoHidden, query);
+
+        if (query.empty()) co_return;
+
+        std::vector<winrt::StarlightGUI::ProcessInfo> filteredProcesses;
+
+        for (auto& process : m_processList) {
+            filteredProcesses.push_back(process);
+        }
+
+		ApplyFilter(filteredProcesses, query);
+    }
+
+    void TaskPage::ApplyFilter(std::vector<winrt::StarlightGUI::ProcessInfo>& processes, hstring& query) {
+        for (const auto& process : processes) {
+
+            std::wstring name = process.Name().c_str();
+            std::wstring description = process.Description().c_str();
+            std::wstring queryWStr = query.c_str();
+            // No case comparing
+
+            std::transform(name.begin(), name.end(), name.begin(), ::towlower);
+            std::transform(description.begin(), description.end(), description.begin(), ::towlower);
+            std::transform(queryWStr.begin(), queryWStr.end(), queryWStr.begin(), ::towlower);
+
+            uint32_t index;
+            if (m_processList.IndexOf(process, index) && name.find(queryWStr) == std::wstring::npos &&
+                description.find(queryWStr) == std::wstring::npos) {
+                m_processList.RemoveAt(index);
+            }
+        }
+    }
+
 
     void TaskPage::RefreshProcessListButton_Click(IInspectable const&, RoutedEventArgs const&)
     {

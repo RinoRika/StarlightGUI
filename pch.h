@@ -30,6 +30,7 @@
 #include <winrt/Microsoft.UI.Xaml.Shapes.h>
 #include <winrt/Microsoft.UI.Dispatching.h>
 #include <winrt/Microsoft.UI.Windowing.h>
+#include <winrt/Microsoft.UI.Text.h>
 #include <winrt/Microsoft.UI.h>
 #include <wil/cppwinrt_helpers.h>
 #include <microsoft.ui.xaml.window.h>

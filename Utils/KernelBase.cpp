@@ -9,17 +9,17 @@ namespace winrt::StarlightGUI::implementation {
 		LPVOID drivers[1024];
 		DWORD cbNeeded;
 
-		if (!EnumDeviceDrivers(drivers, sizeof(drivers), &cbNeeded)) {
+		if (!K32EnumDeviceDrivers(drivers, sizeof(drivers), &cbNeeded)) {
 			return 0;
 		}
 
 		int driverCount = cbNeeded / sizeof(drivers[0]);
 
 		for (int i = 0; i < driverCount; i++) {
-			CHAR driverName[MAX_PATH];
-			if (GetDeviceDriverBaseNameA(drivers[i], driverName, sizeof(driverName))) {
+			WCHAR driverName[MAX_PATH];
+			if (K32GetDeviceDriverBaseNameW(drivers[i], driverName, sizeof(driverName))) {
 
-				if (_stricmp(driverName, "ci.dll") == 0) {
+				if (_wcsicmp(driverName, L"ci.dll") == 0) {
 					return (DWORD64)drivers[i];
 				}
 			}
@@ -28,7 +28,7 @@ namespace winrt::StarlightGUI::implementation {
 		return 0;
 	}
 	ULONG64 KernelBase::HackCI() {
-		HMODULE hModule = LoadLibraryExA("C:\\Windows\\System32\\ci.dll", NULL, DONT_RESOLVE_DLL_REFERENCES);
+		HMODULE hModule = LoadLibraryExW(L"C:\\Windows\\System32\\ci.dll", NULL, DONT_RESOLVE_DLL_REFERENCES);
 		if (!hModule) return 0;
 
 		// Offset for Windows 11 25H2
